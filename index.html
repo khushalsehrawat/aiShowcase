@@ -16,6 +16,11 @@
     <link rel="stylesheet" href="styles.css">
   </head>
   <body>
+    <div class="cursor-dot" aria-hidden="true"></div>
+    <div class="cursor-ring" aria-hidden="true"></div>
+    <div class="noise-layer" aria-hidden="true"></div>
+    <canvas id="luxuryCanvas" aria-hidden="true"></canvas>
+
     <nav class="navbar navbar-expand-lg fixed-top glass-nav">
       <div class="container">
         <a class="navbar-brand fw-black" href="#home">AI Content Studio</a>
@@ -36,26 +41,35 @@
     <main id="home">
       <section class="hero-section">
         <div class="hero-bg" role="img" aria-label="AI generated cinematic model portrait"></div>
+        <div class="hero-orb orb-one"></div>
+        <div class="hero-orb orb-two"></div>
         <div class="hero-scrim"></div>
         <div class="container position-relative">
           <div class="row hero-row align-items-center">
             <div class="col-lg-8 col-xl-7">
-              <p class="eyebrow" data-aos="fade-up">AI Models . Product Ads . Brand Visuals . Motion</p>
-              <h1 class="hero-title" data-aos="fade-up" data-aos-delay="80">Premium AI content for brands that need to look unforgettable.</h1>
-              <p class="hero-copy" data-aos="fade-up" data-aos-delay="160">
+              <p class="eyebrow reveal-line">AI Models . Product Ads . Brand Visuals . Motion</p>
+              <h1 class="hero-title reveal-title">Premium AI content for brands that need to look unforgettable.</h1>
+              <p class="hero-copy reveal-line">
                 I create polished AI visuals for fashion, products, people, ads, thumbnails, social posts, and cinematic campaigns. Clean concepts, premium styling, and final assets ready for serious client work.
               </p>
-              <div class="d-flex flex-wrap gap-3" data-aos="fade-up" data-aos-delay="240">
-                <a class="btn btn-luxury rounded-pill px-4" href="#work">View Portfolio</a>
-                <a class="btn btn-outline-luxury rounded-pill px-4" href="#contact">Start a Project</a>
+              <div class="d-flex flex-wrap gap-3 reveal-line">
+                <a class="btn btn-luxury magnetic rounded-pill px-4" href="#work">View Portfolio</a>
+                <a class="btn btn-outline-luxury magnetic rounded-pill px-4" href="#contact">Start a Project</a>
               </div>
             </div>
           </div>
         </div>
-        <div class="hero-stats" data-aos="fade-left" data-aos-delay="340">
+        <div class="hero-stats reveal-panel">
           <div><strong>30+</strong><span>visual assets</span></div>
           <div><strong>10</strong><span>AI videos</span></div>
           <div><strong>4</strong><span>content styles</span></div>
+        </div>
+      </section>
+
+      <section class="marquee-section" aria-label="Studio capabilities">
+        <div class="marquee-track">
+          <span>AI Model Shoots</span><i></i><span>Luxury Product Ads</span><i></i><span>Cinematic Reels</span><i></i><span>Brand Campaigns</span><i></i><span>Fashion Concepts</span><i></i>
+          <span>AI Model Shoots</span><i></i><span>Luxury Product Ads</span><i></i><span>Cinematic Reels</span><i></i><span>Brand Campaigns</span><i></i><span>Fashion Concepts</span><i></i>
         </div>
       </section>
 
@@ -93,6 +107,23 @@
             </div>
           </div>
           <div class="gallery-grid" id="galleryGrid" aria-live="polite"></div>
+        </div>
+      </section>
+
+      <section class="showcase-ribbon">
+        <div class="container">
+          <div class="ribbon-grid">
+            <div class="ribbon-copy" data-aos="fade-up">
+              <p class="eyebrow dark">Signature style</p>
+              <h2 class="section-title">Realistic, cinematic, and ready to sell the idea.</h2>
+              <p class="section-copy">The goal is not just generation. It is art direction: lighting, emotion, product focus, model presence, and the exact visual mood your client should feel.</p>
+            </div>
+            <div class="stacked-frames" data-aos="fade-left">
+              <img src="images/10.png" alt="Luxury product visual">
+              <img src="images/ChatGPT Image Jun 4, 2026, 05_11_57 PM.png" alt="Cinematic AI portrait">
+              <img src="images/Gemini_Generated_Image_kbj2bjkbj2bjkbj2.png" alt="AI fashion model concept">
+            </div>
+          </div>
         </div>
       </section>
 
@@ -228,6 +259,8 @@
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>

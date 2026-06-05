@@ -28,24 +28,28 @@ const galleryItems = [
 ];
 
 const videos = [
-  { file: "Model_holding_snack_pack_202606041554.mp4", title: "Product Model Reel", text: "AI talent holding a snack pack for a commercial-style clip." },
-  { file: "Woman_touching_chest_fabric_202606041557.mp4", title: "Fabric Detail Motion", text: "Fashion-focused movement for clothing and material storytelling." },
-  { file: "Model_showcases_her_dress_202606041729.mp4", title: "Dress Showcase", text: "Short creator-style fashion reel for social campaigns." },
-  { file: "Untitled video (1).mp4", title: "Ultra Real Scene", text: "Cinematic clip generated for high-impact presentation moments." },
+  { file: "Create_a_second_ultra_re.mp4", title: "Ultra Real Scene", text: "Cinematic clip generated for high-impact presentation moments." },
   { file: "keep_focusing_on_cat_only_and (1).mp4", title: "Focused Subject Clip", text: "Prompt-controlled subject focus and movement test." },
-  { file: "Modify_that_prompt_into_real_a.mp4", title: "Realistic Motion Test", text: "Generated movement refined into a more natural ad-ready look." }
+  { file: "Model_showcases_her_dress_202606041729 (1).mp4", title: "Dress Showcase Cut", text: "Alternate AI fashion reel with model-led styling and movement." },
+  { file: "Model_showcases_her_dress_202606041729.mp4", title: "Dress Showcase", text: "Short creator-style fashion reel for social campaigns." },
+  { file: "Modify_that_prompt_into_real_a.mp4", title: "Realistic Motion Test", text: "Generated movement refined into a more natural ad-ready look." },
+  { file: "Untitled video (1).mp4", title: "Cinematic Reel 01", text: "AI-generated motion scene prepared for ad and concept presentation." },
+  { file: "Untitled video (2).mp4", title: "Cinematic Reel 02", text: "Premium AI video clip with product and model campaign potential." },
+  { file: "Untitled video (3).mp4", title: "Cinematic Reel 03", text: "Longer motion experiment for dramatic brand storytelling." },
+  { file: "Woman_touching_chest_fabric_202606041557.mp4", title: "Fabric Detail Motion", text: "Fashion-focused movement for clothing and material storytelling." }
 ];
 
 const galleryGrid = document.querySelector("#galleryGrid");
 const videoReel = document.querySelector("#videoReel");
+let lightbox;
 
 function renderGallery(filter = "all") {
   const items = filter === "all" ? galleryItems : galleryItems.filter((item) => item.type === filter);
 
-  galleryGrid.innerHTML = items.map((item, index) => {
+  galleryGrid.innerHTML = items.map((item) => {
     const path = `${imageBase}${item.file}`;
     return `
-      <a class="gallery-item glightbox" href="${path}" data-gallery="ai-work" data-title="${item.title}" data-aos="fade-up" data-aos-delay="${Math.min(index % 6, 5) * 40}">
+      <a class="gallery-item glightbox" href="${path}" data-gallery="ai-work" data-title="${item.title}">
         <img src="${path}" alt="${item.title}" loading="lazy">
         <span class="gallery-caption">
           <strong>${item.title}</strong>
@@ -55,8 +59,15 @@ function renderGallery(filter = "all") {
     `;
   }).join("");
 
-  GLightbox({ selector: ".glightbox", touchNavigation: true, loop: true });
-  AOS.refreshHard();
+  if (lightbox) {
+    lightbox.destroy();
+  }
+  if (window.GLightbox) {
+    lightbox = GLightbox({ selector: ".glightbox", touchNavigation: true, loop: true });
+  }
+  if (window.AOS) {
+    AOS.refresh();
+  }
 }
 
 function renderVideos() {
@@ -75,9 +86,12 @@ function renderVideos() {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  AOS.init({ duration: 700, once: true, offset: 80 });
+  if (window.AOS) {
+    AOS.init({ duration: 650, once: true, offset: 80 });
+  }
   renderGallery();
   renderVideos();
+  initLuxuryExperience();
 
   document.querySelectorAll("[data-filter]").forEach((button) => {
     button.addEventListener("click", () => {
@@ -87,18 +101,20 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  new Swiper(".reel-swiper", {
-    slidesPerView: 1.1,
-    spaceBetween: 18,
-    centeredSlides: false,
-    pagination: { el: ".swiper-pagination", clickable: true },
-    navigation: { nextEl: ".swiper-button-next", prevEl: ".swiper-button-prev" },
-    breakpoints: {
-      576: { slidesPerView: 2.1 },
-      992: { slidesPerView: 3.2 },
-      1200: { slidesPerView: 4 }
-    }
-  });
+  if (window.Swiper) {
+    new Swiper(".reel-swiper", {
+      slidesPerView: 1.1,
+      spaceBetween: 20,
+      centeredSlides: false,
+      pagination: { el: ".swiper-pagination", clickable: true },
+      navigation: { nextEl: ".swiper-button-next", prevEl: ".swiper-button-prev" },
+      breakpoints: {
+        576: { slidesPerView: 1.35 },
+        768: { slidesPerView: 2 },
+        1200: { slidesPerView: 3 }
+      }
+    });
+  }
 
   document.querySelector("#projectForm").addEventListener("submit", async (event) => {
     event.preventDefault();
@@ -116,3 +132,211 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
+
+function initLuxuryExperience() {
+  initCursor();
+  initGsapMotion();
+  initCanvasAtmosphere();
+}
+
+function initCursor() {
+  const dot = document.querySelector(".cursor-dot");
+  const ring = document.querySelector(".cursor-ring");
+  if (!dot || !ring || window.matchMedia("(max-width: 991px)").matches) return;
+
+  let mouseX = window.innerWidth / 2;
+  let mouseY = window.innerHeight / 2;
+  let ringX = mouseX;
+  let ringY = mouseY;
+
+  window.addEventListener("mousemove", (event) => {
+    mouseX = event.clientX;
+    mouseY = event.clientY;
+    dot.style.transform = `translate(${mouseX}px, ${mouseY}px) translate(-50%, -50%)`;
+  });
+
+  function animateCursor() {
+    ringX += (mouseX - ringX) * 0.16;
+    ringY += (mouseY - ringY) * 0.16;
+    ring.style.transform = `translate(${ringX}px, ${ringY}px) translate(-50%, -50%)`;
+    requestAnimationFrame(animateCursor);
+  }
+
+  animateCursor();
+
+  document.querySelectorAll("a, button, input, textarea, select, video, .gallery-item").forEach((item) => {
+    item.addEventListener("mouseenter", () => ring.classList.add("is-active"));
+    item.addEventListener("mouseleave", () => ring.classList.remove("is-active"));
+  });
+}
+
+function initGsapMotion() {
+  if (!window.gsap) return;
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  const nav = document.querySelector(".glass-nav");
+  ScrollTrigger.create({
+    start: "top -70",
+    end: 99999,
+    toggleClass: { className: "nav-scrolled", targets: nav }
+  });
+
+  gsap.from(".reveal-line", {
+    y: 32,
+    opacity: 0,
+    duration: 0.9,
+    stagger: 0.12,
+    ease: "power3.out"
+  });
+
+  gsap.from(".reveal-title", {
+    y: 42,
+    opacity: 0,
+    filter: "blur(10px)",
+    duration: 1.1,
+    delay: 0.08,
+    ease: "power3.out"
+  });
+
+  gsap.from(".reveal-panel div", {
+    y: 22,
+    opacity: 0,
+    duration: 0.75,
+    stagger: 0.08,
+    delay: 0.45,
+    ease: "power3.out"
+  });
+
+  gsap.to(".hero-bg", {
+    scale: 1.08,
+    yPercent: 5,
+    ease: "none",
+    scrollTrigger: {
+      trigger: ".hero-section",
+      start: "top top",
+      end: "bottom top",
+      scrub: true
+    }
+  });
+
+  gsap.utils.toArray(".section-title").forEach((title) => {
+    gsap.from(title, {
+      y: 28,
+      opacity: 0,
+      duration: 0.85,
+      ease: "power3.out",
+      scrollTrigger: {
+        trigger: title,
+        start: "top 82%"
+      }
+    });
+  });
+
+  gsap.to(".stacked-frames img:nth-child(1)", {
+    y: -42,
+    rotate: -12,
+    ease: "none",
+    scrollTrigger: { trigger: ".showcase-ribbon", start: "top bottom", end: "bottom top", scrub: true }
+  });
+
+  gsap.to(".stacked-frames img:nth-child(2)", {
+    y: 36,
+    scale: 1.04,
+    ease: "none",
+    scrollTrigger: { trigger: ".showcase-ribbon", start: "top bottom", end: "bottom top", scrub: true }
+  });
+
+  gsap.to(".stacked-frames img:nth-child(3)", {
+    y: -28,
+    rotate: 12,
+    ease: "none",
+    scrollTrigger: { trigger: ".showcase-ribbon", start: "top bottom", end: "bottom top", scrub: true }
+  });
+
+  document.querySelectorAll(".magnetic").forEach((button) => {
+    button.addEventListener("mousemove", (event) => {
+      const rect = button.getBoundingClientRect();
+      const x = event.clientX - rect.left - rect.width / 2;
+      const y = event.clientY - rect.top - rect.height / 2;
+      gsap.to(button, { x: x * 0.18, y: y * 0.28, duration: 0.22, ease: "power2.out" });
+    });
+
+    button.addEventListener("mouseleave", () => {
+      gsap.to(button, { x: 0, y: 0, duration: 0.35, ease: "elastic.out(1, 0.45)" });
+    });
+  });
+}
+
+function initCanvasAtmosphere() {
+  const canvas = document.querySelector("#luxuryCanvas");
+  if (!canvas) return;
+
+  const context = canvas.getContext("2d");
+  const particles = [];
+  const particleCount = window.innerWidth < 768 ? 0 : 28;
+  let width;
+  let height;
+  let deviceRatio;
+
+  function resize() {
+    deviceRatio = Math.min(window.devicePixelRatio || 1, 2);
+    width = window.innerWidth;
+    height = window.innerHeight;
+    canvas.width = width * deviceRatio;
+    canvas.height = height * deviceRatio;
+    canvas.style.width = `${width}px`;
+    canvas.style.height = `${height}px`;
+    context.setTransform(deviceRatio, 0, 0, deviceRatio, 0, 0);
+  }
+
+  function createParticle() {
+    return {
+      x: Math.random() * width,
+      y: Math.random() * height,
+      radius: Math.random() * 2.2 + 0.5,
+      speedX: (Math.random() - 0.5) * 0.28,
+      speedY: Math.random() * -0.22 - 0.05,
+      alpha: Math.random() * 0.42 + 0.12
+    };
+  }
+
+  function resetParticles() {
+    particles.length = 0;
+    for (let index = 0; index < particleCount; index += 1) {
+      particles.push(createParticle());
+    }
+  }
+
+  function draw() {
+    if (particleCount === 0) return;
+    context.clearRect(0, 0, width, height);
+
+    particles.forEach((particle) => {
+      particle.x += particle.speedX;
+      particle.y += particle.speedY;
+
+      if (particle.y < -10 || particle.x < -10 || particle.x > width + 10) {
+        Object.assign(particle, createParticle(), { y: height + 10 });
+      }
+
+      const gradient = context.createRadialGradient(particle.x, particle.y, 0, particle.x, particle.y, particle.radius * 8);
+      gradient.addColorStop(0, `rgba(234, 210, 162, ${particle.alpha})`);
+      gradient.addColorStop(1, "rgba(234, 210, 162, 0)");
+      context.fillStyle = gradient;
+      context.beginPath();
+      context.arc(particle.x, particle.y, particle.radius * 8, 0, Math.PI * 2);
+      context.fill();
+    });
+
+    requestAnimationFrame(draw);
+  }
+
+  resize();
+  resetParticles();
+  draw();
+  window.addEventListener("resize", () => {
+    resize();
+    resetParticles();
+  });
+}
